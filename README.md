@@ -1,4 +1,8 @@
 # pscp
+###################################################
+#Copyright © 2015 by ACANETS. All rights reserved.#
+###################################################
+
 PerfSONAR Control Plane
 
 Our control plane is used to start a test between two perfSONAR hosts, monitor the throughput performance and locate the source of network issues when problem happens
