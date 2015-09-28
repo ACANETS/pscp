@@ -1,7 +1,6 @@
 # pscp
-###################################################
-#Copyright © 2015 by ACANETS. All rights reserved.#
-###################################################
+
+Copyright © 2015 by ACANETS. All rights reserved.
 
 PerfSONAR Control Plane
 
