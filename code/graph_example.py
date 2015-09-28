@@ -1,7 +1,3 @@
-###################################################
-#Copyright © 2015 by ACANETS. All rights reserved.#
-###################################################
-
 from graph import *
 
 #provide the name of the file which contains all the tracepaths
@@ -38,6 +34,10 @@ tol = 24
 new_path = build_pr_path(g, trace_path, rng, tol)
 
 #debug and print the new_path
+print new_path
+print "\n\n\n"
+
+new_path = find_pr_path(trace_path, rng, tol)
 print new_path
 print "\n\n\n"
 

@@ -1,7 +1,3 @@
-###################################################
-#Copyright © 2015 by ACANETS. All rights reserved.#
-###################################################
-
 from sets import Set
 import json
 import socket
@@ -198,4 +194,10 @@ def build_pr_path(graph={}, trace_path = [], rng=1, tol=32):
 		if flag == 0:
 			new_path.append("None")
 	new_path.append(trace_path[len(trace_path)-1])	
+	return new_path
+	
+def find_pr_path(trace_path = [], rng=1, tol=32):
+	file_name = "new_dataset"
+	g = build_graph_from_file(file_name)
+	new_path = build_pr_path(g, trace_path, rng, tol)
 	return new_path
