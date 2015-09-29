@@ -18,9 +18,12 @@ Our control plane is used to start a test between two perfSONAR hosts, monitor t
 
  1.4 graphviz_example.py is used for visualizing the traceroute graph. It needs corresponding Python library.
 
- 2.control_plane.py is the code for online measurement test controls.
 
-   To start the control plane, use:
+ 2.Online Control Plane
+ 
+ control_plane.py is the code for online measurement test controls.
+
+ To start the control plane, use:
    
      python control_plane.py [source_host_name] [destination_host_name]
 
