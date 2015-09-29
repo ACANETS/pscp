@@ -7,20 +7,22 @@ Our control plane is used to start a test between two perfSONAR hosts, monitor t
    build_graph.py is the code for offline Measurement Archive (MA) data processing. The objective is to build a traceroute graph for find_ps_node module.
  
  1.1. query_diy.py 
- 
- This module is used to return a list of MA hosts from perfSONAR lookup service directory.
+
+   This module is used to return a list of MA hosts from perfSONAR lookup service directory.
 
  1.2. traceroute_collector.py
-
- This module can build a traceroute dataset by retrieving the traceroute tests records in hosts' MAs by using perfSONAR client REST interface.
- 
- dataset95 is a small dataset we built from 95 chosen MA hosts in central and eastern regions of US.
+      
+   This module can build a traceroute dataset by retrieving the traceroute tests records in hosts' MAs by using perfSONAR client REST interface.
+      
+   dataset95 is a small dataset we built from 95 chosen MA hosts in central and eastern regions of US.
 
 graphviz_example.py is used for visualizing the traceroute graph. It needs corresponding Python library.
 
  2.control_plane.py is the code for online measurement test controls.
 
-   To start the control plane, use "python control_plane.py [source_host_name] [destination_host_name]".
+   To start the control plane, use:
+   
+     python control_plane.py [source_host_name] [destination_host_name].
 
  1.1. find_ps_node.py is one module of our control plane.
       After obtaining the traceroute of a problematic path, this module is used to find the nearest perfSONAR node for each target router on the path by looking up the graph we built offline.
