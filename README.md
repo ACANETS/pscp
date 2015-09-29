@@ -25,8 +25,10 @@ Our control plane is used to start a test between two perfSONAR hosts, monitor t
      python control_plane.py [source_host_name] [destination_host_name]
 
  2.1 find_ps_node.py is one module of our control plane.
-      After obtaining the traceroute of a problematic path, this module is used to find the nearest perfSONAR node for each target router on the path by looking up the graph we built offline.
-     graph_example.py is a small example of this module.
+      
+After obtaining the traceroute of a problematic path, this module is used to find the nearest perfSONAR node for each target router on the path by looking up the graph we built offline.
+
+graph_example.py is a small example of this module.
 
  2.2 issue_locator.py is another module of our control plane.
       
