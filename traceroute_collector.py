@@ -20,7 +20,7 @@ import requests
 import sys
 from query_diy import get_service_locator
 
-ma  = get_service_locator("service-type=ma")
+ma = get_service_locator("service-type=ma") #return all the MA hostnames
 print ma
 
 tracepath_ps = [] #index for all nodes
@@ -86,6 +86,6 @@ for name in ma:  #each perfsonar node
 
 	counter = counter + 1
 	if (counter%50) == 0:
-		f = open('/home/chen/Documents/code/data'+ str(counter) ,'w+')
+		f = open('data'+ str(counter) ,'w+')
 		json.dump(tracepath_ps,f)
 		f.close()
