@@ -12,9 +12,13 @@ Our control plane is used to start a test between two perfSONAR hosts, monitor t
 
  In traceroute_collector.py, we deploy one module: query_diy.py
  
- 1.1 query_diy.py is a module in this program which is used to return a list of MA hosts from perfSONAR lookup service directory.
+ 1.1 query_diy.py 
+ 
+ It is a module in this program which is used to return a list of MA hosts from perfSONAR lookup service directory.
    
- 1.2 dataset95 is a small dataset we queried from 95 chosen MA hosts in central and eastern regions of US. It's in json format.
+ 1.2 dataset95 
+
+ It is a small dataset we queried from 95 chosen MA hosts in central and eastern regions of US. It's in json format.
 
  
 
@@ -37,7 +41,9 @@ After obtaining the traceroute of a problematic path, this module is used to fin
  
  The objective is to build a traceroute graph for find_ps_node module when we detect the abnormalities.
 
- 2.1.2 graph_example.py is a small example of replacing the IP address of target routers on a specific path with perfSONAR nodes' IP.
+ 2.1.2 graph_example.py 
+ 
+ This is a small example of replacing the IP address of target routers on a specific path with perfSONAR nodes' IP.
 
  2.2 issue_locator.py 
  
@@ -48,7 +54,8 @@ After obtaining the traceroute of a problematic path, this module is used to fin
 After replacing the routers with their nearest perfSONAR nodes, this module is used to start throughput tests from both end nodes(A, B) to each other nodes to find the long-clean path (B-D, RTT>20ms), and locate the source (C-D) of network issue .
 
   3.Other Tool
-    graphviz_example.py is used for visualizing the traceroute graph. It needs graphviz Python library.
+    
+graphviz_example.py is used for visualizing the traceroute graph. It needs graphviz Python library.
 
 
 
