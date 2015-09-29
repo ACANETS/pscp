@@ -17,7 +17,7 @@ Our control plane is used to start a test between two perfSONAR hosts, monitor t
 
 1.2. issue_locator.py is another module of our control plane.
 
-                A-----C--X--D-----E-----F-----I-----H-----G-----B
+        A-----C--X--D-----E-----F-----I-----H-----G-----B
 
      After replacing the routers with their nearest perfSONAR nodes, 
      this module is used to start throughput tests from both end nodes(A, B) 
@@ -35,7 +35,8 @@ Our control plane is used to start a test between two perfSONAR hosts, monitor t
      This module can build a traceroute dataset by retrieving the traceroute tests records 
      in hosts' MAs by using perfSONAR client REST interface.
 
-     dataset95 is a small dataset we built from 95 chosen MA hosts in central and eastern regions of US.
+     dataset95 is a small dataset we built from 95 chosen MA hosts 
+     in central and eastern regions of US.
 
 graphviz_example.py is used for visualizing the traceroute graph. It needs corresponding Python library.
 
