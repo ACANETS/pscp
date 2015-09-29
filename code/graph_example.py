@@ -21,7 +21,7 @@ print "\n\n\n"
 #trace_path = ["pr20.uml.edu", "129.63.205.254", "172.16.4.25", "129.63.189.34", "172.16.5.1", "172.16.1.240", "69.16.3.7", "69.16.3.249", "38.104.218.13", "154.54.3.197", "154.54.3.93", "154.54.31.125", "154.54.41.46", "154.24.22.130", "38.104.168.234", "208.65.23.1", "208.65.23.67", "208.65.23.44"]
 
 #pick the possibly problematic trace_path from the file
-trace_path = ["pr20.uml.edu", "129.63.205.254", "172.16.4.25", "129.63.189.34", "172.16.5.1", "172.16.1.240", "69.16.3.7", "207.210.143.57", "192.5.89.18", "198.71.45.8", "192.170.225.5", "192.170.224.78", "192.170.227.164"]
+#trace_path = ["pr20.uml.edu", "129.63.205.254", "172.16.4.25", "129.63.189.34", "172.16.5.1", "172.16.1.240", "69.16.3.7", "207.210.143.57", "192.5.89.18", "198.71.45.8", "192.170.225.5", "192.170.224.78", "192.170.227.164"]
 
 #debug and print the trace_path
 print trace_path
@@ -31,7 +31,7 @@ print "\n\n\n"
 #set up the parameters and build a new path which consists of all the nearest perfsonar nodes for each router on the path
 rng = 3
 tol = 24
-new_path = build_pr_path(g, trace_path, rng, tol)
+#new_path = build_pr_path(g, trace_path, rng, tol)
 
 #debug and print the new_path
 print new_path
