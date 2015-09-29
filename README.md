@@ -8,7 +8,8 @@ Our control plane is used to start a test between two perfSONAR hosts, monitor t
 
 1.1 find_ps_node.py is one module of our control plane.
 
-    After obtaining the traceroute of a problematic path, this module is used to find the nearest perfSONAR node for each target router on the path by looking up the graph we built offline.
+    After obtaining the traceroute of a problematic path, this module is used to find the 
+    nearest perfSONAR node for each target router on the path by looking up the graph we built offline.
 
     graph_example.py is a small example of this module.
 
@@ -26,7 +27,8 @@ Our control plane is used to start a test between two perfSONAR hosts, monitor t
 
 2.2 traceroute_collector.py
 
-    This module can build a traceroute dataset by retrieving the traceroute tests records in hosts' MAs by using perfSONAR client REST interface.
+    This module can build a traceroute dataset by retrieving the traceroute tests records 
+    in hosts' MAs by using perfSONAR client REST interface.
 
     dataset95 is a small dataset we built from 95 chosen MA hosts in central and eastern regions of US.
 
