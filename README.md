@@ -17,7 +17,9 @@ Our control plane is used to start a test between two perfSONAR hosts, monitor t
 
                 A-----C--X--D-----E-----F-----I-----H-----G-----B
 
-    After replacing the routers with their nearest perfSONAR nodes, this module is used to start throughput tests from both end nodes(A, B) to each other nodes to find the long-clean path (B-D, RTT>20ms) and locate the source (C-D) of network issue .
+    After replacing the routers with their nearest perfSONAR nodes, this module is used to 
+    start throughput tests from both end nodes(A, B) to each other nodes to 
+    find the long-clean path (B-D, RTT>20ms) and locate the source (C-D) of network issue .
 
 2. build_graph.py is the code for offline Measurement Archive (MA) data processing.
 
