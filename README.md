@@ -2,7 +2,7 @@
 
 Our control plane is used to start a test between two perfSONAR hosts, monitor the throughput performance and locate the source of network issues when problem happens.
 
- 1.Preparation Work: offline Measurement Archive (MA) data collecting
+ ## 1.Preparation Work: offline Measurement Archive (MA) data collecting
  
  traceroute_collector.py can build a traceroute dataset by retrieving the traceroute tests records in hosts' MAs by using perfSONAR client REST interface.
  
@@ -23,7 +23,7 @@ Our control plane is used to start a test between two perfSONAR hosts, monitor t
  
 
 
- 2.Online Control Plane
+ ## 2.Online Control Plane
  
  control_plane.py is the code for online measurement test controls. We implement the meaausrement and troubleshooting methods between two specific perfSONAR nodes.
 
