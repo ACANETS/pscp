@@ -19,13 +19,16 @@ Our control plane is used to start a test between two perfSONAR hosts, monitor t
  1.4 graphviz_example.py is used for visualizing the traceroute graph. It needs corresponding Python library.
 
 
+
  2.Online Control Plane
  
- control_plane.py is the code for online measurement test controls.
+ control_plane.py is the code for online measurement test controls. We implement the meaausrement and troubleshooting methods between two specific perfSONAR nodes.
 
- To start the control plane, use:
+ To start the control plane, use command:
    
      python control_plane.py [source_host_name] [destination_host_name]
+     
+In control_plane.py, we deploy the following two modules: find_ps_node.py and issue_locator.py
 
  2.1 find_ps_node.py is one module of our control plane.
       
@@ -34,7 +37,9 @@ After obtaining the traceroute of a problematic path, this module is used to fin
 graph_example.py is a small example of this module.
 
  2.2 issue_locator.py is another module of our control plane.
-      
+ 
+  An example of problematic path:    
+  
       A-----C--X--D-----E-----F-----I-----H-----G-----B
 
 After replacing the routers with their nearest perfSONAR nodes, this module is used to start throughput tests from both end nodes(A, B) to each other nodes to find the long-clean path (B-D, RTT>20ms), and locate the source (C-D) of network issue .
