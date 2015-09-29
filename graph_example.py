@@ -14,11 +14,12 @@
 # limitations under the License.                                          #
 ###########################################################################
 
-from graph import *
+from build_graph import *
+from find_ps_node import *
 
 #provide the name of the file which contains all the tracepaths
 #build the graph upon the file
-file_name = "new_dataset"
+file_name = "dataset95"
 g = build_graph_from_file(file_name)
 
 #debug and print the graph

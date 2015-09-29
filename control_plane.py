@@ -21,7 +21,8 @@ import json
 import sys
 import re
 import time
-from graph import *
+from build_graph import *
+from find_ps_node import *
 from issue_locator import locator
 
 SLEEP_TIME = 60  #run a throughput test every 60 seconds

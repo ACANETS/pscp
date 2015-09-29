@@ -14,22 +14,19 @@
 # limitations under the License.                                          #
 ###########################################################################
 
-from graph import *
+#This file provides an example for how to visulize the traceroute graph
+#Please follow https://pypi.python.org/pypi/graphviz to install the necessary packages first
+from build_graph import *
+from find_ps_node import *
 from graphviz import *
-from subprocess import call
 import os
-"""
+
 #provide the name of the file which contains all the tracepaths
 #build the graph upon the file
-file_name = "new_dataset"
+file_name = "dataset95"
 g = build_graph_from_file_IP(file_name)
 
-#debug and print the graph
-print g
-print "\n\n\n"
-
-
-#use graphvz to generate the pdf file
+#use graphvz to generate the DOT file
 dot = Graph(comment='The Traceroute Graph')
 dot.engine = 'sfdp'
 
@@ -50,7 +47,6 @@ for ver in vers:
 		
 f = open('traceroute.gv', 'w')
 f.write(dot.source)
-"""
-#call(["sfdp", "-x", "-Goverlap=prism", "-Tpng", "traceroute.gv",  ">", "traceroute.png"])
-#call(["sfdp -x -Goverlap=prism -Tpng traceroute.gv  > traceroute.png"])
+
+#system call the sfdp command in the graphviz package to generate the graph
 os.system("sfdp -x -Goverlap=prism -Tpng traceroute.gv  > traceroute.png")

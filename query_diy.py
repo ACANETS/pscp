@@ -96,14 +96,13 @@ def modify_str(in_str, qstr):
 	return out_str, ip_flag, http_flag
 
 ###############################################################################
-
+#This function is used for obtaining all the active hostnames that provide the correspondng service 
 def get_service_locator(qstr):
 	_ls_hosts = get_hosts()
 	records_all, entry_num = query(qstr,_ls_hosts)
 	service_locator = []
 	for record in records_all:
 		for temp_in_str in record.get("service-locator"):
-			#print temp_in_str + "\n"
 			temp_out_str, ip_flag, http_flag = modify_str(temp_in_str, qstr)
 			if ip_flag == 0 or http_flag==0:
 				continue
@@ -111,7 +110,6 @@ def get_service_locator(qstr):
 				service_locator.append(temp_out_str)
 				if qstr == "service-type=mp-bwctl" or qstr == "service-type=mp-owamp" or qstr == "service-type=ma":
 					break
-				#print temp_out_str + "\n
 	return service_locator
 
 #################################################################################
