@@ -18,6 +18,7 @@ from sets import Set
 import json
 import socket
 import random
+from build_graph import *
 
 #find the perfsonar nodes in the range of rng around the given node pr_node
 #it uses the BFS algorithm

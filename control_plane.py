@@ -80,8 +80,9 @@ if __name__ == "__main__":
 
                 	start_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             		print "Troubleshooting starts at " + start_time 
-			print "###########################################################"
+			
 			trace = trace_test(src_host,dst_host)
+            		print "###########################################################"
             		print "The traceroute is:"
             		print trace
 			print "###########################################################"
