@@ -66,7 +66,7 @@ if __name__ == "__main__":
 		print print_info
 		sys.exit(0)
 	print "PSCP starts..."
-	print “/n”
+	print "/n"
 
     	# Start monitoring
 	while 1:
@@ -76,19 +76,19 @@ if __name__ == "__main__":
 
         	if int(tp_value) < 100000000:          #100Mbps
 
-			print "The path has a problem!!!!\n”
+			print "The path has a problem!!!!\n"
 
                 	start_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             		print "Troubleshooting starts at " + start_time 
-			print “###########################################################”
+			print "###########################################################"
 			trace = trace_test(src_host,dst_host)
             		print "The traceroute is:"
             		print trace
-			print “###########################################################”
+			print "###########################################################"
           	  	ps_trace = find_pr_path(trace,RNG,TOL)		#find nearest ps nodes for target routers
            		print "The traceroute after replacing is:"
 			print ps_trace
-			print “###########################################################”
+			print "###########################################################"
  			print "\n"
 
 	            	location = locator(ps_trace,tp_value)		#locate the problematic source(s)
