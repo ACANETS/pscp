@@ -22,7 +22,7 @@ import sys
 import re
 import time
 import datetime
-from graph import *
+from find_ps_node import *
 from issue_locator import locator
 
 SLEEP_TIME = 60  #run a throughput test every 60 seconds
@@ -30,7 +30,7 @@ RNG = 3          #the distance betweeb ps node and target router
 TOL = 24         #subnet range
 
 
-print_info =  "Please follow this formate to start the program\n\tcontrol_plane.py [source_host_name] [destination_host_name]\n\n\tsource_host_name: The host name or IP address where the test starts from\n\tdestination_host_name: The host name or IP addree where the test ends to\n"
+print_info =  "Please follow this formate to start the program:\n\tcontrol_plane.py [source_host_name] [destination_host_name]\n\n\tsource_host_name: The host name or IP address where the test starts from\n\tdestination_host_name: The host name or IP addree where the test ends to\n"
 
 #Start a new bwctl test
 def bwctl_test(src_host,dst_host):
@@ -66,7 +66,7 @@ if __name__ == "__main__":
 		print print_info
 		sys.exit(0)
 	print "PSCP starts..."
-	print "/n"
+	print "\n"
 
     	# Start monitoring
 	while 1:
