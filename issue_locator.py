@@ -38,7 +38,7 @@ def locator(ps_trace,tp_value):
 	print "\n"
       
     	#Start from B
-    	for i in range(1,len(ps_trace)-1):
+    	for i in range(1,len(ps_trace)-1)[::-1]:
            	tp2 = os.popen('bwctl -s ' + ps_trace[len(ps_trace)-1] + ' -c ' + ps_trace[i] + ' -t 20').read()
 	       	print tp2
 		tp3 = re.findall(r'(\d+)\sbits',tp2)

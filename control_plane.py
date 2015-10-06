@@ -21,8 +21,8 @@ import json
 import sys
 import re
 import time
-from build_graph import *
-from find_ps_node import *
+import datetime
+from graph import *
 from issue_locator import locator
 
 SLEEP_TIME = 60  #run a throughput test every 60 seconds
@@ -44,15 +44,15 @@ def bwctl_test(src_host,dst_host):
 
 #Start a traceroute test
 def trace_test(src_host, dst_host):
-	try:
+	while 1:
 		trace0 = os.popen('bwtraceroute -s ' + src_host + ' -c ' + dst_host).read()
+		print trace0
 		trace = re.findall(r'\((\d+\.\d+\.\d+\.\d+)\)',trace0)
-		del trace[0]
-		trace.insert(0,src_host)
-        print trace0
-		return trace
-	except:
-		trace_test(src_host, dst_host)
+		if len(trace) != 0:
+			break
+	del trace[0]
+	trace.insert(0,src_host)
+	return trace
 
 if __name__ == "__main__":
 	try:
@@ -65,6 +65,8 @@ if __name__ == "__main__":
 	if len(sys.argv) != 3:
 		print print_info
 		sys.exit(0)
+	print "PSCP starts..."
+	print “/n”
 
     	# Start monitoring
 	while 1:
@@ -73,17 +75,26 @@ if __name__ == "__main__":
         	print "\n"
 
         	if int(tp_value) < 100000000:          #100Mbps
-			print "The path has a problem!\n"
-                
-            		trace = trace_test(src_host,dst_host)
+
+			print "The path has a problem!!!!\n”
+
+                	start_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            		print "Troubleshooting starts at " + start_time 
+			print “###########################################################”
+			trace = trace_test(src_host,dst_host)
             		print "The traceroute is:"
             		print trace
-            
-          	  	ps_trace = find_pr_path(trace,RNG,TOL) #find nearest ps nodes for target routers
-           		print "The tracepath after replacing is:"
+			print “###########################################################”
+          	  	ps_trace = find_pr_path(trace,RNG,TOL)		#find nearest ps nodes for target routers
+           		print "The traceroute after replacing is:"
 			print ps_trace
+			print “###########################################################”
  			print "\n"
-	            	location = locator(ps_trace,tp_value)    #locate the problematic source(s)
+
+	            	location = locator(ps_trace,tp_value)		#locate the problematic source(s)
+			
+			end_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+			print "Troubleshooting ends at " + end_time
                		sys.exit(0) 
 		else:	
 			time.sleep(SLEEP_TIME)
