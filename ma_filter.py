@@ -25,15 +25,23 @@ print ma
 f.close
 
 filtered_ma = []
+count = 1
+bar_length = 50
+
 for i in ma:
 	ping0 = os.popen('ping -c 5 ' + i[7:len(i)-25]).read()
 	print ping0
 	ping_value = re.findall(r'time=(\d+\.\d+)\sms',ping0)
 	if len(ping_value) != 0:
 		filtered_ma.append(i)
-        print "################"
 	print filtered_ma
-        print "################"
+	percentage = (count/len(ma))*100
+	hashes = '#' * (percentage/100 * bar_length)
+	spaces = ' ' * (bar_length - len(hashes))
+	print "\n"
+	print str(percentage) + "% [" + hashes + spaces + "]"
+	print "\n"
+	count = count + 1        
 
 fp = open('filtered_ma_list', 'a+')
 json.dump(filtered_ma,fp)
