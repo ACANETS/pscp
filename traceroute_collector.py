@@ -29,9 +29,8 @@ counter = 0
 for name in ma:  #each perfsonar node
 	try:
 		data = requests.get(name +"?format=json")
-	except requests.exceptions.ConnectionError as e:
-		print e
-		continue
+	except:
+        	continue
 
 	if data is None:
 		continue
@@ -52,8 +51,7 @@ for name in ma:  #each perfsonar node
 		if k['tool-name'][0:15] == 'bwctl/tracepath':
 			try:
 				trace_ps0 = requests.get('http://' + k['input-source'] + k['uri'] + 'packet-trace/base?format=json')
-			except requests.exceptions.ConnectionError as e:
-				print e
+			except:
 				continue
 
 			if trace_ps0 is None:
