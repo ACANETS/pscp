@@ -25,14 +25,14 @@ import datetime
 from find_ps_node import *
 from issue_locator import locator
 
-SLEEP_TIME = 60  #run a throughput test every 60 seconds
-RNG = 3          #the distance betweeb ps node and target router
-TOL = 24         #subnet range
-
+SLEEP_TIME = 60  	 #run a throughput test every 60 seconds
+RNG = 3          	 #the distance betweeb ps node and target router
+TOL = 24         	 #subnet range
+TP_THRESHOLD = 100000000 # Set the threshold to define the problematic path
 
 print_info =  "Please follow this formate to start the program:\n\tcontrol_plane.py [source_host_name] [destination_host_name]\n\n\tsource_host_name: The host name or IP address where the test starts from\n\tdestination_host_name: The host name or IP addree where the test ends to\n"
 
-#Start a new bwctl test
+# Start a new bwctl test
 def bwctl_test(src_host,dst_host):
 	try:
 		throughput0 = os.popen('bwctl -s ' + src_host + ' -c ' + dst_host + ' -t 20').read()
@@ -42,7 +42,7 @@ def bwctl_test(src_host,dst_host):
 	except:
 		return 0
 
-#Start a traceroute test
+# Start a traceroute test
 def trace_test(src_host, dst_host):
 	while 1:
 		trace0 = os.popen('bwtraceroute -s ' + src_host + ' -c ' + dst_host).read()
@@ -70,29 +70,29 @@ if __name__ == "__main__":
 
     	# Start monitoring
 	while 1:
-		tp_value = bwctl_test(src_host,dst_host)
+		tp_value = bwctl_test(src_host,dst_host)       # Check the throughput performance using bwctl tool
         	print "The throughput is: " + str(tp_value) + " bits/s"
         	print "\n"
 
-        	if int(tp_value) < 100000000:          #100Mbps
+        	if int(tp_value) < TP_THRESHOLD: 
 
 			print "The path has a problem!!!!\n"
 
                 	start_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             		print "Troubleshooting starts at " + start_time 
 			
-			trace = trace_test(src_host,dst_host)
+			trace = trace_test(src_host,dst_host)         # Obtian the traceroute info using bwtraceroute tool
             		print "###########################################################"
             		print "The traceroute is:"
             		print trace
 			print "###########################################################"
-          	  	ps_trace = find_pr_path(trace,RNG,TOL)		#find nearest ps nodes for target routers
+          	  	ps_trace = find_pr_path(trace,RNG,TOL)		# Find nearest ps nodes for target routers
            		print "The traceroute after replacing is:"
 			print ps_trace
 			print "###########################################################"
  			print "\n"
 
-	            	location = locator(ps_trace,tp_value)		#locate the problematic source(s)
+	            	location = locator(ps_trace,tp_value)		# Locate the problematic source(s)
 			
 			end_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 			print "Troubleshooting ends at " + end_time

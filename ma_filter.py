@@ -14,11 +14,15 @@
 # limitations under the License.                                          #
 ###########################################################################
 
+
+# This script is used for filtering the bad url from ma_list and keep the good url
+
 import os
 import json
 import sys
 import re
 
+# Read the MA list from file
 f = open('ma_list','r')
 ma = json.load(f)
 print ma
@@ -28,13 +32,16 @@ filtered_ma = []
 count = 1
 bar_length = 50
 
+
 for i in ma:
-	ping0 = os.popen('ping -c 5 ' + i[7:len(i)-25]).read()
+	ping0 = os.popen('ping -c 3 ' + i[7:len(i)-25]).read()   #Use ping tool to check the network connection
 	print ping0
 	ping_value = re.findall(r'time=(\d+\.\d+)\sms',ping0)
 	if len(ping_value) != 0:
 		filtered_ma.append(i)
 	print filtered_ma
+
+	# Print a progress bar
 	percentage = (count/len(ma))*100
 	hashes = '#' * (percentage/100 * bar_length)
 	spaces = ' ' * (bar_length - len(hashes))
@@ -43,6 +50,7 @@ for i in ma:
 	print "\n"
 	count = count + 1        
 
+# Write the filter result to a new file 
 fp = open('filtered_ma_list', 'a+')
 json.dump(filtered_ma,fp)
 fp.close() 

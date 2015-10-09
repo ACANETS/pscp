@@ -20,19 +20,19 @@ import requests
 import sys
 from query_diy import get_service_locator
 
-ma = get_service_locator("service-type=ma") #return all the MA hostnames
+ma = get_service_locator("service-type=ma") # Return all the MA hostnames
 print ma
 
-tracepath_ps = [] #index for all nodes
+tracepath_ps = [] 
 
 counter = 0
-for name in ma:  #each perfsonar node
+for name in ma:  # Each perfsonar node
 	try:
 		data = requests.get(name +"?format=json")
 	except:
         	continue
 
-	if data is None:
+	if data is None:       # Skip this node if its MA has no data
 		continue
 	else:
 		try:
@@ -43,12 +43,12 @@ for name in ma:  #each perfsonar node
 	if len(data0) == 0:
 		continue
 
-	for k in data0:	#each traceroute test in ps node
+	for k in data0:	# Each traceroute test in ps node
 		try:
 			test = k['tool-name'][0:15]
 		except: 
 			continue
-		if k['tool-name'][0:15] == 'bwctl/tracepath':
+		if k['tool-name'][0:15] == 'bwctl/tracepath':  # Filter the test
 			try:
 				trace_ps0 = requests.get('http://' + k['input-source'] + k['uri'] + 'packet-trace/base?format=json')
 			except:
@@ -66,11 +66,12 @@ for name in ma:  #each perfsonar node
 				continue
 			else: 	
 				try:
-					test = trace_ps[0]['val']
+					test = trace_ps[0]['val']  # Jsut need one path since others are alomost the same
 				except:
 					continue
                                 print trace_ps[0]
-				ip_addr = []    #traceroute ip addr
+
+				ip_addr = []    
 				for i in trace_ps[0]['val']:
 					ip_addr.append(i['ip'])
 				ip_addr.insert(0,name[7:len(name)-25])
