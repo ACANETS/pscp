@@ -23,7 +23,7 @@ def locator(ps_trace,tp_value):
     	test_throughput1 = []
     	test_throughput2 = []
     
-   	 #Start from A
+   	#Start from A
     	for i in range(1,len(ps_trace)-1): 
             	tp0 = os.popen('bwctl -s ' + ps_trace[0] + ' -c ' + ps_trace[i] + ' -t 20').read()
 	       	print tp0
