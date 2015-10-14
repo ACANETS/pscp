@@ -14,6 +14,9 @@
 # limitations under the License.                                          #
 ###########################################################################
 
+
+# This file is used to collect the details (routes' IP addresses) of traceroute tests
+
 import os
 import json
 import requests

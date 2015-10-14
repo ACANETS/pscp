@@ -14,6 +14,9 @@
 # limitations under the License.                                          #
 ###########################################################################
 
+
+# This file is used to record the bwctl/traceroute test uri in MAs and put all the records into a file
+
 import os
 import json
 import requests
