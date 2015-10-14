@@ -18,9 +18,12 @@ import os
 import json
 import requests
 import sys
-from query_diy import get_service_locator
+#from query_diy import get_service_locator
 
-ma = get_service_locator("service-type=ma") # Return all the MA hostnames
+#ma = get_service_locator("service-type=ma") # Return all the MA hostnames
+f  = open('filtered_ma_list','r')
+ma = json.load(f)
+f.close()
 print ma
 
 tracepath_ps = [] 
@@ -74,7 +77,7 @@ for name in ma:  # Each perfsonar node
 				ip_addr = []    
 				for i in trace_ps[0]['val']:
 					ip_addr.append(i['ip'])
-				ip_addr.insert(0,name[7:len(name)-25])
+				ip_addr.insert(0,k['input-source'])
 				ip_addr = sorted(set(ip_addr),key=ip_addr.index)
 				print "################################################"
 				print ip_addr
