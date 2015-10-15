@@ -29,8 +29,8 @@ print ma
 f.close
 
 filtered_ma = []
-count = 1
-bar_length = 50
+count = 1.0
+bar_length = 100
 
 
 for i in ma:
@@ -43,12 +43,12 @@ for i in ma:
 
 	# Print a progress bar
 	percentage = (count/len(ma))*100
-	hashes = '#' * (percentage/100 * bar_length)
+	hashes = '#' * percentage
 	spaces = ' ' * (bar_length - len(hashes))
 	print "\n"
 	print str(percentage) + "% [" + hashes + spaces + "]"
 	print "\n"
-	count = count + 1        
+	count = count + 1.0
 
 # Write the filter result to a new file 
 fp = open('filtered_ma_list', 'a+')
