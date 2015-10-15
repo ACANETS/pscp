@@ -52,8 +52,6 @@ for name in ma:
 			 continue
 		if k['tool-name'][0:15] == 'bwctl/tracepath':
 			traceroute_test[node].append('http://' + k['input-source'] + k['uri'] + 'pacet-trace/base?format=json')
-			print traceroute_test
-			print "#####################"
-	f = open('traceroute_tests','w+')
+	f = open('ma_record','w+')
 	json.dump(traceroute_test,f)
 	f.close() 	
