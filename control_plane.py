@@ -24,6 +24,7 @@ import time
 import datetime
 from find_ps_node import *
 from issue_locator import locator
+from bwctl_tool import *
 
 SLEEP_TIME = 60  	 #run a throughput test every 60 seconds
 RNG = 3          	 #the distance betweeb ps node and target router
@@ -31,28 +32,6 @@ TOL = 24         	 #subnet range
 TP_THRESHOLD = 100000000 # Set the threshold to define the problematic path
 
 print_info =  "Please follow this formate to start the program:\n\tcontrol_plane.py [source_host_name] [destination_host_name]\n\n\tsource_host_name: The host name or IP address where the test starts from\n\tdestination_host_name: The host name or IP addree where the test ends to\n"
-
-# Start a new bwctl test
-def bwctl_test(src_host,dst_host):
-	try:
-		throughput0 = os.popen('bwctl -s ' + src_host + ' -c ' + dst_host + ' -t 20').read()
-		print throughput0
-		throughput = re.findall(r'(\d+)\sbits',throughput0)
-		return throughput[0]
-	except:
-		return 0
-
-# Start a traceroute test
-def trace_test(src_host, dst_host):
-	while 1:
-		trace0 = os.popen('bwtraceroute -s ' + src_host + ' -c ' + dst_host).read()
-		print trace0
-		trace = re.findall(r'\((\d+\.\d+\.\d+\.\d+)\)',trace0)
-		if len(trace) != 0:
-			break
-	del trace[0]
-	trace.insert(0,src_host)
-	return trace
 
 if __name__ == "__main__":
 	try:
@@ -92,7 +71,7 @@ if __name__ == "__main__":
 			print "###########################################################"
  			print "\n"
 
-	            	location = locator(ps_trace,tp_value)		# Locate the problematic source(s)
+	            	location = locator(trace,ps_trace,tp_value)		# Locate the problematic source(s)
 			
 			end_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 			print "Troubleshooting ends at " + end_time
