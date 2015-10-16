@@ -21,9 +21,7 @@ import os
 import json
 import requests
 import sys
-#from query_diy import get_service_locator
 
-#ma = get_service_locator("service-type=ma") # Return all the MA hostnames
 f  = open('filtered_ma_list','r')
 ma = json.load(f)
 f.close()

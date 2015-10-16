@@ -21,11 +21,11 @@ import os
 import json
 import sys
 import re
+from query_diy import get_service_locator
 
-# Read the MA list from file
-f = open('ma_list','r')
-ma = json.load(f)
-print ma
+ma = get_service_locator("service-type=ma") #return all the MA hostnames
+f = open('ma_list','w+')
+json.dump(ma,f)
 f.close
 
 filtered_ma = []
