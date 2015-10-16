@@ -25,7 +25,7 @@ import sys
 ma = []
 traceroute_test = {}
 
-f = open('ma_list','r')
+f = open('filtered_ma_list','r')
 ma = json.load(f)
 f.close()
 
