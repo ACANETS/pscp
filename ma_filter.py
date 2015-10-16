@@ -46,7 +46,7 @@ for i in ma:
 	hashes = '#' * percentage
 	spaces = ' ' * (bar_length - len(hashes))
 	print "\n"
-	print str(percentage) + "% [" + hashes + spaces + "]"
+	print str(int(percentage)) + "% [" + hashes + spaces + "]"
 	print "\n"
 	count = count + 1.0
 
