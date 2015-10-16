@@ -90,6 +90,22 @@ It is a small dataset we queried from 95 chosen MA hosts in central and eastern 
 
 ### 5.APIs
 
+##### 5.1 from bwctl_tool import *
+
+string    bwctl_test(string src_host, string dst_host): start a throughput test between two perfSONAR hosts using bwctl and return the result (bit/s).
+
+list      trace_test(string src_host, strinf dst_host): start a traceroute test between two perfSONAR hosts using bwtraceroute and return the result.
+
+##### 5.2 from find_ps_node import *
+
+list      find_pr_path(list trace,int RNG,int TOL): find nearest ps nodes for target routers in trace. RNG represents the distance between the router and the perfSONAR node in the graph. TOL represents the subnet range we use to find the router in the graph.
+
+##### 5.3 from issue_locator import *
+
+void      locator(list trace, list ps_trace, string tp_value): locator the problematic source(s). trace represents the original traceroute. ps_trace represents the traceroute after we replace the routers' IP with perfSONARs' IP.
+
+
+
 
 
 
