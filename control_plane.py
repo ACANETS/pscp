@@ -27,7 +27,7 @@ from issue_locator import locator
 from bwctl_tool import *
 
 SLEEP_TIME = 60  	 #run a throughput test every 60 seconds
-RNG = 3          	 #the distance betweeb ps node and target router
+RNG = 3          	 #the distance between ps node and target router
 TOL = 24         	 #subnet range
 TP_THRESHOLD = 100000000 # Set the threshold to define the problematic path
 

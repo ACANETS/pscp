@@ -29,6 +29,9 @@ f = open('filtered_ma_list','r')
 ma = json.load(f)
 f.close()
 
+count = 1.0
+bar_length = 100
+
 for name in ma:
 	try:	
 		data = requests.get(name+ "?format=json")
@@ -52,6 +55,15 @@ for name in ma:
 			 continue
 		if k['tool-name'][0:15] == 'bwctl/tracepath':
 			traceroute_test[node].append('http://' + k['input-source'] + k['uri'] + 'pacet-trace/base?format=json')
+	print traceroute_test
+	percentage = (count/len(ma))*100
+	hashes = '#' * int(percentage)
+	spaces = ' ' * (bar_length - len(hashes))
+	print "\n"
+	print str(int(percentage)) + "% [" + hashes +spaces + "]"
+	print "\n"
+	count = count + 1.0
+ 
 	f = open('ma_record','w+')
 	json.dump(traceroute_test,f)
 	f.close() 	
