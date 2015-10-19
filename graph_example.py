@@ -38,12 +38,13 @@ print "\n\n\n"
 #set up the parameters and build a new path which consists of all the nearest perfsonar nodes for each router on the path
 rng = 3
 tol = 24
-#new_path = build_pr_path(g, trace_path, rng, tol)
+new_path = build_pr_path(g, trace_path, rng, tol)
 
 #debug and print the new_path
 print new_path
 print "\n\n\n"
 
+#find_pr_path is an extended version of build_pr_path, this function implicity uses the dataset95
 new_path = find_pr_path(trace_path, rng, tol)
 print new_path
 print "\n\n\n"
