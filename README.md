@@ -94,7 +94,7 @@ It is a small dataset we queried from 95 chosen MA hosts in central and eastern 
 
 string    bwctl_test(string src_host, string dst_host): start a throughput test between two perfSONAR hosts using bwctl and return the result (bit/s).
 
-list      trace_test(string src_host, strinf dst_host): start a traceroute test between two perfSONAR hosts using bwtraceroute and return the result.
+list      trace_test(string src_host, string dst_host): start a traceroute test between two perfSONAR hosts using bwtraceroute and return the result.
 
 ##### 5.2 from find_ps_node import *
 
@@ -102,7 +102,15 @@ list      find_pr_path(list trace,int RNG,int TOL): find nearest ps nodes for ta
 
 ##### 5.3 from issue_locator import *
 
-void      locator(list trace, list ps_trace, string tp_value): locator the problematic source(s). trace represents the original traceroute. ps_trace represents the traceroute after we replace the routers' IP with perfSONARs' IP.
+void      locator(list trace, list ps_trace, string tp_value): locate the problematic source(s). trace represents the original traceroute. ps_trace represents the traceroute after we replace the routers' IP with perfSONARs' IP.
+
+##### 5.4 from build_graph import *
+dict      build_graph(dict graph, list trace_path): update the 'graph' by inserting the 'trapce_path' into the 'graph', i.e. inserting the nodes and edges into the graph. 'graph' represents the current graph. 'trace_path' represents the tracepath between two hosts.
+
+dict      build_graph_from_file(string file_name): build a graph from a file which consists of all the tracepaths. The 'file_name' represents the file that contains the tracepaths dataset. The file must be in the format of [tracepath_1, tracepath_2, tracepath_3, ......, tracepath_n]. Each 'tracepath_i' is in the format of ['ip_1', 'ip_2', 'ip_3', ......, 'ip_m'].
+
+##### 5.5 from query_diy import *
+list      get_service_locator(string qstr): return all the hostnames that provide some certain services. 'qstr' is the query string, currently this function supports qstr = "service-type=bwctl", "service-type=mp-bwctl", "service-type=owamp", "service-type=mp-owamp", "service-type=ping", "service-type=traceroute", "service-type=ndt", "service-type=npad", and "service-type=ma".
 
 
 
