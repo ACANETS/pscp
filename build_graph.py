@@ -44,12 +44,18 @@ def build_graph(graph = {}, trace_path = []):
 		if graph.get(trace_path[i]) == None:
 			graph[trace_path[i]] = {}
 			graph[trace_path[i]]["type"] = []
-			graph[trace_path[i]]["adjacent"] = []	
+			graph[trace_path[i]]["adjacent"] = []
+			graph[trace_path[i]]["paths"] = []
+		
+		if (i != 0) and (i != len(trace_path)-1):
+			if (trace_path[0] != None) and (trace_path[0] != "reply") and (trace_path[len(trace_path)-1] != None) and (trace_path[len(trace_path)-1] != "reply"):
+				graph[trace_path[i]]["paths"].append( {"Start":trace_path[0], "End":trace_path[len(trace_path)-1]} )	
 			
 		if  i == 0:
 			graph[trace_path[i]]["type"] = "P"
 			if trace_path[i+1] not in graph[trace_path[i]]["adjacent"] and trace_path[i+1] != None and trace_path[i+1] != "reply":
 				graph[trace_path[i]]["adjacent"].append(trace_path[i+1])
+				
 			
 		elif i == len(trace_path) - 1:
 			graph[trace_path[i]]["type"] = "P"
@@ -83,7 +89,12 @@ def build_graph_IP(graph = {}, trace_path = []):
 		if graph.get(trace_path[i]) == None:
 			graph[trace_path[i]] = {}
 			graph[trace_path[i]]["type"] = []
-			graph[trace_path[i]]["adjacent"] = []	
+			graph[trace_path[i]]["adjacent"] = []
+			graph[trace_path[i]]["paths"] = []
+			
+		if (i != 0) and (i != len(trace_path)-1):
+			if (trace_path[0] != None) and (trace_path[0] != "reply") and (trace_path[len(trace_path)-1] != None) and (trace_path[len(trace_path)-1] != "reply"):
+				graph[trace_path[i]]["paths"].append( {"Start":trace_path[0], "End":trace_path[len(trace_path)-1]} )	
 			
 		if  i == 0:
 			graph[trace_path[i]]["type"] = "P"
