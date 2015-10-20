@@ -16,6 +16,7 @@
 
 from build_graph import *
 from find_ps_node import *
+from find_paths_with_common_edges import *
 
 #provide the name of the file which contains all the tracepaths
 #build the graph upon the file
@@ -48,5 +49,10 @@ print "\n\n\n"
 new_path = find_pr_path(trace_path, rng, tol)
 print new_path
 print "\n\n\n"
+
+
+# find the other possible 'paths' that share the 1 common edges with 'trace_path' in the graph 'g'
+paths = find_paths_with_common_edges(g, trace_path, 1)
+print paths	
 
 
