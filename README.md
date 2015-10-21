@@ -75,12 +75,15 @@ It is a dataset contains all the MAs' hostname.
 
 It is a dataset after we filter the "bad" MAs in ma_list.
 
+#### 4.3 ma_record_[timestamp]
 
-##### 4.3 dataset
+It is a dataset contains all the traceroute tests uris.
+
+##### 4.4 dataset
 
 It is a dataset contains the details of all the traceroute tests.
 
-##### 4.4 dataset95 
+##### 4.5 dataset95 
 
 It is a small dataset we queried from 95 chosen MA hosts in central and eastern regions of US. 
 
