@@ -36,9 +36,6 @@ def locator(trace,ps_trace,tp_value):
 		else:
             		test_throughput1.append('0')
     	test_throughput1.append(tp_value)
-	print "Results from " + ps_trace[0] + " is:"
-	print test_throughput1
-	print "\n"
       
     	#Start from B
     	for i in range(1,len(ps_trace)-1)[::-1]:
@@ -49,16 +46,25 @@ def locator(trace,ps_trace,tp_value):
 			test_throughput2.insert(0,tp3[0])
 		else:
             		test_throughput2.insert(0,'0')
-    	test_throughput2.insert(0,tp_value) 	
+    	test_throughput2.insert(0,tp_value)
+	
+	print “\n”
+	print “Summarization: ”
+	print "Results from " + ps_trace[0] + " is:"
+	print test_throughput1	
 	print "Results from " + ps_trace[-1] + " is:"
 	print test_throughput2
 	print "\n"
+	print “The original trace is:”	
+	print trace
+	print “The trace after replacing is:”
+	print ps_trace
  
     	for i in range(0,len(test_throughput1)-1):
             	if int(test_throughput1[i]) > 1000000000 and int(test_throughput1[i+1]) < 100000000:
-          		print "The problem path is from " + trace[i+1] + " to  " + trace[i+2]
+          		print "The problem path is from " + ps_trace[i+1] + " to  " + ps_trace[i+2]
     	for i in range(1,len(test_throughput2))[::-1]:
             	if int(test_throughput2[i]) > 1000000000 and int(test_throughput2[i-1]) < 100000000:
-            		print "The problem path is from " + trace[i-1] + " to  " + trace[i-2] 
+            		print "The problem path is from " + ps_trace[i-1] + " to  " + ps_trace[i-2]
     
     
