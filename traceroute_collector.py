@@ -32,7 +32,7 @@ tracepath_ps = []
 counter = 0
 for name in ma:  # Each perfsonar node
 	try:
-		data = requests.get(name +"?format=json")
+		data = requests.get(name +"?format=json",timeout=10)
 	except:
         	continue
 
@@ -54,7 +54,7 @@ for name in ma:  # Each perfsonar node
 			continue
 		if k['tool-name'][0:15] == 'bwctl/tracepath':  # Filter the test
 			try:
-				trace_ps0 = requests.get('http://' + k['input-source'] + k['uri'] + 'packet-trace/base?format=json')
+				trace_ps0 = requests.get('http://' + k['input-source'] + k['uri'] + 'packet-trace/base?format=json',timeout=10)
 			except:
 				continue
 

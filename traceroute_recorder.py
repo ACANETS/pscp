@@ -21,9 +21,9 @@ import os
 import json
 import requests
 import sys
+import time
 
-ma = []
-traceroute_test = {}
+
 
 f = open('filtered_ma_list','r')
 ma = json.load(f)
@@ -31,10 +31,18 @@ f.close()
 
 count = 1.0
 bar_length = 100
+timestamp = int(time.time())
 
 for name in ma:
+    percentage = (count/len(ma))*100
+    hashes = '#' * int(percentage)
+    spaces = ' ' * (bar_length - len(hashes))
+    count = counte + 1.0
+    print str(int(percentage)) + "% [" + hashes +spaces + "]"
+    print "\n"
+        
 	try:	
-		data = requests.get(name+ "?format=json")
+		data = requests.get(name+ "?format=json",timeout=10)
 	except:
 		continue
 	if data is None:
@@ -54,16 +62,13 @@ for name in ma:
 		except:
 			 continue
 		if k['tool-name'][0:15] == 'bwctl/tracepath':
-			traceroute_test[node].append('http://' + k['input-source'] + k['uri'] + 'pacet-trace/base?format=json')
+			record = {}
+			record['uri'] = 'http://' + k['input-source'] + k['uri'] + 'pacet-trace/base?format=json'
+			record['ts'] = k['event-types'][0]['time-updated']
+			traceroute_test[node].append(record)
 	print traceroute_test
-	percentage = (count/len(ma))*100
-	hashes = '#' * int(percentage)
-	spaces = ' ' * (bar_length - len(hashes))
 	print "\n"
-	print str(int(percentage)) + "% [" + hashes +spaces + "]"
-	print "\n"
-	count = count + 1.0
- 
-	f = open('ma_record','w+')
+
+	f = open('ma_record_'+ str(timestamp),'w+')
 	json.dump(traceroute_test,f)
 	f.close() 	
