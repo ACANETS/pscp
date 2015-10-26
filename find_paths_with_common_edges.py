@@ -13,10 +13,18 @@
 # See the License for the specific language governing permissions and     #
 # limitations under the License.                                          #
 ###########################################################################
+import socket
 
 # This function finds the other possible 'paths' that share the 'num_comm_edges' common edges with 'trace_path' in the 'graph'
 # We only consider the concatenated common edges
 def find_paths_with_common_edges(graph = {}, trace_path = [], num_comm_edges = 0):
+	#
+	try:
+		head_ip = socket.gethostbyname(trace_path[0])
+		tail_ip = socket.gethostbyname(trace_path[len(trace_path)-1])
+	except:
+		pass
+	
 	paths = {}
 	if(len(trace_path) < 4) or (num_comm_edges <= 0):
 		return paths		
@@ -34,7 +42,7 @@ def find_paths_with_common_edges(graph = {}, trace_path = [], num_comm_edges = 0
 			temp = list(start_end_set)
 			start_end = []
 			for j in range(len(temp)):
-				if (temp[j].split()[0] != trace_path[0]) and (temp[j].split()[1] != trace_path[len(trace_path)-1]):
+				if (temp[j].split()[0] != trace_path[0]) and (temp[j].split()[1] != trace_path[len(trace_path)-1]) and (temp[j].split()[0] != head_ip) and (temp[j].split()[1] != tail_ip):
 					start_end.append(temp[j])			
 			paths[trace_path[i] + "  " + trace_path[i+num_comm_edges]] = start_end
 		i += 1
