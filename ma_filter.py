@@ -43,7 +43,7 @@ for i in ma:
 
 	# Print a progress bar
 	percentage = (count/len(ma))*100
-	hashes = '#' * percentage
+	hashes = '#' * int(percentage)
 	spaces = ' ' * (bar_length - len(hashes))
 	print "\n"
 	print str(int(percentage)) + "% [" + hashes + spaces + "]"

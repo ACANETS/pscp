@@ -35,7 +35,6 @@ for name in ma:  # Each perfsonar node
 		data = requests.get(name +"?format=json",timeout=10)
 	except:
         	continue
-
 	if data is None:       # Skip this node if its MA has no data
 		continue
 	else:
@@ -54,7 +53,7 @@ for name in ma:  # Each perfsonar node
 			continue
 		if k['tool-name'][0:15] == 'bwctl/tracepath':  # Filter the test
 			try:
-				trace_ps0 = requests.get('http://' + k['input-source'] + k['uri'] + 'packet-trace/base?format=json',timeout=10)
+                		trace_ps0 = requests.get('http://' + name[7:-25] + k['uri'] + 'packet-trace/base?format=json',timeout=10)
 			except:
 				continue
 
@@ -63,6 +62,7 @@ for name in ma:  # Each perfsonar node
 			else:
 				try:
 					trace_ps = trace_ps0.json()
+					print trace_ps
 				except:
 					continue
 
@@ -87,8 +87,8 @@ for name in ma:  # Each perfsonar node
 				print tracepath_ps
 				print "################################################"
 
-	counter = counter + 1
-	if (counter%50) == 0:
-		f = open('data'+ str(counter) ,'w+')
-		json.dump(tracepath_ps,f)
-		f.close()
+    #counter = counter + 1
+	#if (counter%50) == 0:
+	f = open('data0' ,'w+')
+	json.dump(tracepath_ps,f)
+	f.close()
