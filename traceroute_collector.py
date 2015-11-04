@@ -14,28 +14,25 @@
 # limitations under the License.                                          #
 ###########################################################################
 
-
-# This file is used to collect the details (routes' IP addresses) of traceroute tests
-
 import os
 import json
 import requests
 import sys
 
-f  = open('filtered_ma_list','r')
+ma = []
+f = open('filtered_ma_list','r')
 ma = json.load(f)
 f.close()
-print ma
 
-tracepath_ps = [] 
+tracepath_ps = [] #index for all nodes
 
-counter = 0
-for name in ma:  # Each perfsonar node
+for name in ma:  #each perfsonar node
 	try:
 		data = requests.get(name +"?format=json",timeout=10)
 	except:
-        	continue
-	if data is None:       # Skip this node if its MA has no data
+		continue
+
+	if data is None:
 		continue
 	else:
 		try:
@@ -46,14 +43,14 @@ for name in ma:  # Each perfsonar node
 	if len(data0) == 0:
 		continue
 
-	for k in data0:	# Each traceroute test in ps node
+	for k in data0:	#each traceroute test in ps node
 		try:
 			test = k['tool-name'][0:15]
 		except: 
 			continue
-		if k['tool-name'][0:15] == 'bwctl/tracepath':  # Filter the test
+		if k['tool-name'][0:15] == 'bwctl/tracepath':
 			try:
-                		trace_ps0 = requests.get('http://' + name[7:-25] + k['uri'] + 'packet-trace/base?format=json',timeout=10)
+				trace_ps0 = requests.get('http://' + name[7:-25] + k['uri'] + 'packet-trace/base?format=json', timeout=10)
 			except:
 				continue
 
@@ -62,7 +59,6 @@ for name in ma:  # Each perfsonar node
 			else:
 				try:
 					trace_ps = trace_ps0.json()
-					print trace_ps
 				except:
 					continue
 
@@ -70,12 +66,11 @@ for name in ma:  # Each perfsonar node
 				continue
 			else: 	
 				try:
-					test = trace_ps[0]['val']  # Jsut need one path since others are alomost the same
+					test = trace_ps[0]['val']
 				except:
 					continue
-                                print trace_ps[0]
-
-				ip_addr = []    
+                                #print trace_ps[0]
+				ip_addr = []    #traceroute ip addr
 				for i in trace_ps[0]['val']:
 					ip_addr.append(i['ip'])
 				ip_addr.insert(0,k['input-source'])
@@ -87,8 +82,6 @@ for name in ma:  # Each perfsonar node
 				print tracepath_ps
 				print "################################################"
 
-    #counter = counter + 1
-	#if (counter%50) == 0:
-	f = open('data0' ,'w+')
+	f = open('dataset0','w+')
 	json.dump(tracepath_ps,f)
 	f.close()

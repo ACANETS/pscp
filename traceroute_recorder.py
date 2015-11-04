@@ -32,14 +32,15 @@ f.close()
 count = 1.0
 bar_length = 100
 timestamp = int(time.time())
+traceroute_test = {}
 
 for name in ma:
-    percentage = (count/len(ma))*100
-    hashes = '#' * int(percentage)
-    spaces = ' ' * (bar_length - len(hashes))
-    count = counte + 1.0
-    print str(int(percentage)) + "% [" + hashes +spaces + "]"
-    print "\n"
+	percentage = (count/len(ma))*100
+    	hashes = '#' * int(percentage)
+    	spaces = ' ' * (bar_length - len(hashes))
+    	count = count + 1.0
+    	print str(int(percentage)) + "% [" + hashes +spaces + "]"
+    	print "\n"
         
 	try:	
 		data = requests.get(name+ "?format=json",timeout=10)
@@ -55,17 +56,17 @@ for name in ma:
 	if len(data0) == 0:
 		continue
 	node = name[7:len(name)-25]
-	traceroute_test[node] = []
+	traceroute_test[node] = {}
+	traceroute_test[node]['uri'] = []
 	for k in data0:
 		try:
 			test = k['tool-name'][0:15]
 		except:
 			 continue
-		if k['tool-name'][0:15] == 'bwctl/tracepath':
-			record = {}
-			record['uri'] = 'http://' + k['input-source'] + k['uri'] + 'pacet-trace/base?format=json'
-			record['ts'] = k['event-types'][0]['time-updated']
-			traceroute_test[node].append(record)
+		if k['tool-name'][0:15] == 'bwctl/tracepath':			
+			record = 'http://' + name[7:-25] + k['uri'] + 'pacet-trace/base?format=json'
+			#record['ts'] = k['event-types'][0]['time-updated']
+			traceroute_test[node]['uri'].append(record)
 	print traceroute_test
 	print "\n"
 
