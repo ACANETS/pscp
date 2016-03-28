@@ -51,7 +51,7 @@ for i in ma:
 	count = count + 1.0
 
 # Write the filter result to a new file 
-fp = open('filtered_ma_list', 'a+')
+fp = open('filtered_ma_list', 'w+')
 json.dump(filtered_ma,fp)
 fp.close() 
 	
