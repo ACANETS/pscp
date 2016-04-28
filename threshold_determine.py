@@ -18,71 +18,62 @@ import os
 import json
 import requests
 import sys
-import time 
 
-ma = []
-f = open('filtered_ma_list','r')
-ma = json.load(f)
-f.close()
-timetsamp = int(time.time())
-tracepath_ps = [] #index for all nodes
+tp_ps = [] 
 
-for name in ma:  #each perfsonar node
-	try:
-		data = requests.get(name +"?format=json",timeout=10)
+if __name__ == "__main__":
+	try: 
+		src_host = sys.argv[1]
+		dst_host = sys.argv[2]
 	except:
-		continue
+		print "Input error"
+
+	try:
+		url1 = "http://"+ src_host +"/esmond/perfsonar/archive/?format=json"
+		data = requests.get(url1,timeout=10)
+	except:
+		print "Request error"
 
 	if data is None:
-		continue
+		print "Data is empty"
 	else:
 		try:
 			data0 = data.json()
 		except:
-			continue
+			print "Json error"
 
 	if len(data0) == 0:
-		continue
+		print "Record is empty"
 
-	for k in data0:	#each traceroute test in ps node
-		try:
-			test = k['tool-name'][0:15]
-		except: 
-			continue
-		if k['tool-name'][0:15] == 'bwctl/tracepath':
+	for k in data0:	#each throughput test in ps node
+		if k['tool-name'][0:11] == 'bwctl/iperf' and k['destination'] == dst_host:
 			try:
-				trace_ps0 = requests.get('http://' + name[7:-25] + k['uri'] + 'packet-trace/base?format=json', timeout=10)
+				url2 = 'http://' + src_host + k['uri'] + 'throughput/base?format=json'
+				
+				tp_ps0 = requests.get(url2, timeout=10)
 			except:
 				continue
 
-			if trace_ps0 is None:
+			if tp_ps0 is None:
 				continue
 			else:
 				try:
-					trace_ps = trace_ps0.json()
+					tp_ps = tp_ps0.json()
+					#print tp_ps
 				except:
 					continue
 
-			if len(trace_ps) == 0:
+			if len(tp_ps) == 0:
 				continue
 			else: 	
-				try:
-					test = trace_ps[0]['val']
-				except:
-					continue
-                                #print trace_ps[0]
-				ip_addr = []    #traceroute ip addr
-				for i in trace_ps[0]['val']:
-					ip_addr.append(i['ip'])
-				ip_addr.insert(0,k['input-source'])
-				ip_addr = sorted(set(ip_addr),key=ip_addr.index)
-				print "################################################"
-				print ip_addr
-				print "################################################"
-				tracepath_ps.append(ip_addr)
-				print tracepath_ps
-				print "################################################"
-
-	f = open('dataset_' + str(timestamp),'w+')
-	json.dump(tracepath_ps,f)
-	f.close()
+				tp_record = []
+				for i in range(0,len(tp_ps)):
+					tp_record.append(int(tp_ps[i]['val']))
+				tp_record.sort()
+				print tp_record
+				number = len(tp_record)/5
+				tp_threshold = sum(int(tp_record[j]) for j in range(0,number))/number
+				print tp_threshold
+				sys.exit(1)
+                                
+		

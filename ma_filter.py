@@ -24,7 +24,9 @@ import re
 from query_diy import get_service_locator
 
 ma = get_service_locator("service-type=ma") #return all the MA hostnames
-f = open('ma_list','w+')
+print ma 
+
+f = open('ma_list428','w+')
 json.dump(ma,f)
 f.close
 
@@ -51,7 +53,7 @@ for i in ma:
 	count = count + 1.0
 
 # Write the filter result to a new file 
-fp = open('filtered_ma_list', 'w+')
-json.dump(filtered_ma,fp)
+fp = open('filtered_ma_list428', 'w+')
+json.dump(filtered_ma,f)
 fp.close() 
 	

@@ -27,6 +27,7 @@ import time
 
 f = open('filtered_ma_list','r')
 ma = json.load(f)
+print ma
 f.close()
 
 count = 1.0
