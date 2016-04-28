@@ -110,7 +110,7 @@ def build_pr_path(graph={}, trace_path = [], rng=1, tol=32):
 #it uses the dataset95 to generate the graph and then calls the build_pr_path
 #this function is used for our test	
 def find_pr_path(trace_path = [], rng=1, tol=32):
-	file_name = "dataset95"
+	file_name = "dataset1026"
 	g = build_graph_from_file(file_name)
 	new_path = build_pr_path(g, trace_path, rng, tol)
 	return new_path

@@ -20,7 +20,7 @@ import re
 # Start a new bwctl test
 def bwctl_test(src_host,dst_host):
 	try:
-		throughput0 = os.popen('bwctl -s ' + src_host + ' -c ' + dst_host + ' -t 20').read()
+		throughput0 = os.popen('bwctl -s ' + src_host + ' -c ' + dst_host + ' -t 20 -f b').read()
 		print throughput0
 		throughput = re.findall(r'(\d+)\sbits',throughput0)
 		return throughput[0]

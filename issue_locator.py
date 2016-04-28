@@ -48,16 +48,16 @@ def locator(trace,ps_trace,tp_value):
             		test_throughput2.insert(0,'0')
     	test_throughput2.insert(0,tp_value)
 	
-	print “\n”
-	print “Summarization: ”
+	print "\n"
+	print "Summarization: "
 	print "Results from " + ps_trace[0] + " is:"
 	print test_throughput1	
 	print "Results from " + ps_trace[-1] + " is:"
 	print test_throughput2
 	print "\n"
-	print “The original trace is:”	
+	print "The original trace is:"	
 	print trace
-	print “The trace after replacing is:”
+	print "The trace after replacing is:"
 	print ps_trace
  
     	for i in range(0,len(test_throughput1)-1):

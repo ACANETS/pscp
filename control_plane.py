@@ -45,7 +45,6 @@ if __name__ == "__main__":
 		print print_info
 		sys.exit(0)
 	print "PSCP starts..."
-	print "\n"
 
     	# Start monitoring
 	while 1:
