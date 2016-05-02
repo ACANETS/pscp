@@ -23,7 +23,7 @@ import os
 
 #provide the name of the file which contains all the tracepaths
 #build the graph upon the file
-file_name = "dataset95"
+file_name = "dataset/dataset95"
 g = build_graph_from_file_IP(file_name)
 
 #use graphvz to generate the DOT file

@@ -21,7 +21,7 @@ import sys
 import time 
 
 ma = []
-f = open('filtered_ma_list','r')
+f = open('dataset/filtered_ma_list','r')
 ma = json.load(f)
 f.close()
 timetsamp = int(time.time())
@@ -83,6 +83,6 @@ for name in ma:  #each perfsonar node
 				print tracepath_ps
 				print "################################################"
 
-	f = open('dataset_' + str(timestamp),'w+')
+	f = open('dataset/dataset_' + str(timestamp),'w+')
 	json.dump(tracepath_ps,f)
 	f.close()
