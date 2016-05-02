@@ -67,11 +67,11 @@ After replacing the routers with their nearest perfSONAR nodes, this module is u
 
 ### 4.Dataset (json format)
 
-##### 4.1 ma_list
+##### 4.1 ma_list[date]
 
 It is a dataset contains all the MAs' hostname.
 
-##### 4.2 filtered_ma_list
+##### 4.2 filtered_ma_list[date]
 
 It is a dataset after we filter the "bad" MAs in ma_list.
 
@@ -79,7 +79,7 @@ It is a dataset after we filter the "bad" MAs in ma_list.
 
 It is a dataset contains all the traceroute tests uris.
 
-##### 4.4 dataset
+##### 4.4 datasetotal
 
 It is a dataset contains the details of all the traceroute tests.
 
