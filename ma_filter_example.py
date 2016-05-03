@@ -26,7 +26,7 @@ import re
 #ma = get_service_locator("service-type=ma") #return all the MA hostnames
 #print ma 
 
-f = open('dataset/ma_list501','r')
+f = open('dataset/ma_list503','r')
 ma = json.load(f)
 f.close()
 
@@ -53,7 +53,7 @@ for i in ma:
 	count = count + 1.0
 
 # Write the filter result to a new file 
-fp = open('filtered_ma_list501', 'w+')
+fp = open('dataset/filtered_ma_list503', 'w+')
 json.dump(filtered_ma,fp)
 fp.close() 
 	
