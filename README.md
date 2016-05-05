@@ -61,9 +61,16 @@ After replacing the routers with their nearest perfSONAR nodes, this module is u
  
  We collect all the traceroute test URLs from MAs and write the records into a file. Later, this file will be used to update our traceroute detail dataset as well as the traceroute graph.
  
-##### 3.2 graphviz_example.py 
+##### 3.2 ma_filter_example.py
+ 
+ It is used for collecting active nodes from file ma_list[data].
+ 
+##### 3.3 graphviz_example.py 
  
  It is used for visualizing the traceroute graph. It needs graphviz Python library.
+ 
+##### 3.4 threshold_determine.py
+ It is used for determining the threshold to identify if the path has a problem by looking into the historical bandwideth test results between these two ndoes. If there is no test result before, we will use the default threshold that is 1Gbps.
 
 ### 4.Dataset (json format)
 
@@ -79,7 +86,7 @@ It is a dataset after we filter the "bad" MAs in ma_list.
 
 It is a dataset contains all the traceroute tests uris.
 
-##### 4.4 datasetotal
+##### 4.4 dataset
 
 It is a dataset contains the details of all the traceroute tests.
 
