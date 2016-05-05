@@ -26,7 +26,7 @@ import re
 #ma = get_service_locator("service-type=ma") #return all the MA hostnames
 #print ma 
 
-f = open('dataset/ma_list503','r')
+f = open('dataset/ma_list505','r')
 ma = json.load(f)
 f.close()
 
@@ -36,7 +36,7 @@ bar_length = 100
 
 
 for i in ma:
-	ping0 = os.popen('ping -c 1 ' + i[7:len(i)-25]).read()   #Use ping tool to check the network connection
+	ping0 = os.popen('ping -c 2 ' + i[7:len(i)-25]).read()   #Use ping tool to check the network connection
 	print ping0
 	ping_value = re.findall(r'time=(\d+\.\d+)\sms',ping0)
 	if len(ping_value) != 0:
@@ -53,7 +53,7 @@ for i in ma:
 	count = count + 1.0
 
 # Write the filter result to a new file 
-fp = open('dataset/filtered_ma_list503', 'w+')
+fp = open('dataset/filtered_ma_list505', 'w+')
 json.dump(filtered_ma,fp)
 fp.close() 
 	
