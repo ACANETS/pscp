@@ -26,9 +26,10 @@ from query_diy import get_service_locator
 ma = get_service_locator("service-type=ma") #return all the MA hostnames
 print ma 
 
-f = open('dataset/ma_list503','w+')
+
+f = open('dataset/ma_list180731','w+')
 json.dump(ma,f)
-f.close
+f.close()
 
 filtered_ma = []
 count = 1.0
@@ -53,7 +54,7 @@ for i in ma:
 	count = count + 1.0
 
 # Write the filter result to a new file 
-fp = open('dataset/filtered_ma_list503', 'w+')
+fp = open('dataset/filtered_ma_list180731', 'w+')
 json.dump(filtered_ma,fp)
 fp.close() 
 	

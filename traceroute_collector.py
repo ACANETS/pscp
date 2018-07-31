@@ -18,13 +18,15 @@ import os
 import json
 import requests
 import sys
-import time 
+from datetime import datetime
 
 ma = []
-f = open('dataset/filtered_ma_list','r')
+f = open('dataset/filtered_ma_list180731','r')
 ma = json.load(f)
 f.close()
-timetsamp = int(time.time())
+
+timestamp = datetime.now().strftime("%y%m%d")
+
 tracepath_ps = [] #index for all nodes
 
 for name in ma:  #each perfsonar node
@@ -83,6 +85,6 @@ for name in ma:  #each perfsonar node
 				print tracepath_ps
 				print "################################################"
 
-	f = open('dataset/dataset_' + str(timestamp),'w+')
+	f = open('dataset/dataset_' + timestamp,'w+')
 	json.dump(tracepath_ps,f)
 	f.close()
