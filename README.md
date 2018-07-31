@@ -3,23 +3,19 @@
 Our control plane is used to start a test between two perfSONAR hosts, monitor the throughput performance and locate the source of network issues when problem happens.
 
 ### 1.Preparation Work: offline Measurement Archive (MA) data collecting
+##### 1.1 ma_filter.py
  
- traceroute_collector.py can build a traceroute dataset by retrieving the traceroute tests records in hosts' MAs using perfSONAR client REST interface.
+This script can be used to query and save the list of all MA hosts, and then uses ping to move out the hosts that can't be reached. After running this script, two files are generated: ma_list and filtered_ma_list. 
+
+In this script, we call a module in query_diy.py, which will return a list of MA hosts from perfSONAR lookup service directory.
+ 
+ ##### 1.2 traceroute_collector.py 
+ 
+This script is used to build a traceroute dataset by retrieving the traceroute tests records from MAs of each host listed in "filtered_ma_list" using perfSONAR client REST interface.
  
  To start collecting traceroute data from MA hosts, use command:
  
         python traceroute_collector.py
-
- In this program, we collect the traceroute details from dataset "filtered_ma_list". To obtain this dataset, we use the following tools.
- 
-##### 1.1 ma_filter.py
- 
- This script is used to check the network connection to MAs by using ping. At the end, it will return two files: ma_list and filtered_ma_list. 
- In this script, we deploy a module: query_diy.py
- 
- 1.1.1 query_diy.py 
- 
- It is a module in this program which is used to return a list of MA hosts from perfSONAR lookup service directory.
  
 ### 2.Online Control Plane
  
