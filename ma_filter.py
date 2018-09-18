@@ -37,10 +37,8 @@ bar_length = 100
 
 
 for i in ma:
-	ping0 = os.popen('ping -c 3 ' + i[7:len(i)-25]).read()   #Use ping tool to check the network connection
-	print ping0
-	ping_value = re.findall(r'time=(\d+\.\d+)\sms',ping0)
-	if len(ping_value) != 0:
+	response = os.system('ping -c 3 ' + i[7:len(i)-25])   #Use ping tool to check the network connection
+	if response == 0:
 		filtered_ma.append(i)
 	print filtered_ma
 
