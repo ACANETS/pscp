@@ -21,7 +21,7 @@ import sys
 from datetime import datetime
 
 ma = []
-f = open('dataset/filtered_ma_list180731','r')
+f = open('dataset/filtered_ma_list180810','r')
 ma = json.load(f)
 f.close()
 
@@ -68,16 +68,22 @@ for name in ma:  #each perfsonar node
 			if len(trace_ps) == 0:
 				continue
 			else: 	
-				try:
-					test = trace_ps[0]['val']
-				except:
-					continue
-                                #print trace_ps[0]
-				ip_addr = []    #traceroute ip addr
-				for i in trace_ps[0]['val']:
-					ip_addr.append(i['ip'])
-				ip_addr.insert(0,k['input-source'])
-				ip_addr = sorted(set(ip_addr),key=ip_addr.index)
+				for t in trace_ps:
+					try:
+						test = t['val']
+					except:
+						continue
+					ip_addr = []    #traceroute ip addr
+					temp = []
+					for i in t['val']:
+                                                if i['ip'] == "send":
+							temp.append(k['destination'])
+						elif i['ip'] != "reply" or i['ip'] != None:
+							temp.append(i['ip'])
+					temp.insert(0,k['source'])
+					temp = sorted(set(temp),key=temp.index)
+					if len(ip_addr) < len(temp):
+						ip_addr = [ip for ip in temp]
 				print "################################################"
 				print ip_addr
 				print "################################################"
