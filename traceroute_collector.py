@@ -21,7 +21,7 @@ import sys
 from datetime import datetime
 
 ma = []
-f = open('dataset/filtered_ma_list180810','r')
+f = open('dataset/filtered_ma_list180924','r')
 ma = json.load(f)
 f.close()
 
@@ -31,7 +31,7 @@ tracepath_ps = [] #index for all nodes
 
 for name in ma:  #each perfsonar node
 	try:
-		data = requests.get(name +"?format=json",timeout=10)
+		data = requests.get(name +"?format=json",timeout=30)
 	except:
 		continue
 
@@ -53,7 +53,7 @@ for name in ma:  #each perfsonar node
 			continue
 		if k['tool-name'][0:15] == 'bwctl/tracepath':
 			try:
-				trace_ps0 = requests.get('http://' + name[7:-25] + k['uri'] + 'packet-trace/base?format=json', timeout=10)
+				trace_ps0 = requests.get(k['url'] + 'packet-trace/base?format=json',timeout=30)
 			except:
 				continue
 
@@ -67,7 +67,7 @@ for name in ma:  #each perfsonar node
 
 			if len(trace_ps) == 0:
 				continue
-			else: 	
+			else:
 				for t in trace_ps:
 					try:
 						test = t['val']
@@ -78,7 +78,7 @@ for name in ma:  #each perfsonar node
 					for i in t['val']:
                                                 if i['ip'] == "send":
 							temp.append(k['destination'])
-						elif i['ip'] != "reply" or i['ip'] != None:
+						elif i['ip'] != "reply" and i['ip'] != None:
 							temp.append(i['ip'])
 					temp.insert(0,k['source'])
 					temp = sorted(set(temp),key=temp.index)
